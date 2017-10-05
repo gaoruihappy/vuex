@@ -1,17 +1,15 @@
 <template>
   <div class="hello">
+  <input v-focus>
+  <div  v-demo:hello.a.b="message"></div>
   <p>{{ count }}</p>
   <p  @click="pClick">
-  asdf
-  asdf
-  asdf
-  asdf
   asdf
   </p>
   <p v-on:click="pClick()">
   {{as}}
   </p>
-  <p :class="isRed?'a':'b'" >
+  <p :class="isRed?'a':'b'" >是红色吗
     <button @click="increment">+</button>
     <button @click="decrement">-</button>
   </p>
@@ -32,13 +30,16 @@
 import {
     mapState
 } from 'vuex'
+
 export default {
   name:'count',
   data (){
     return {
       as:23,
+      message: 'hello!'
     }
   },
+
   computed: mapState({
     // 箭头函数可使代码更简练
     count: state => state.count,
@@ -67,6 +68,8 @@ export default {
     },
     increment () {
       console.log(this.$options)
+      this.message="新修改"
+      this.$toast('asd');
       this.$store.commit('increment',5)
       this.$store.commit('ADD_OBG')
     },
@@ -99,5 +102,8 @@ li {
 
 a {
   color: #42b983;
+}
+.a{
+  color:red;
 }
 </style>
