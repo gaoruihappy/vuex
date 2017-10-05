@@ -1,5 +1,8 @@
 export default {
-    inputValue(state){
-        return state.ruleForm.name
+    doneTodos(state){
+        return state.todos.filter(todo => todo.done)
+    },
+    doneTodosCount(state){
+    	return 1
     }
 }

@@ -13,11 +13,11 @@
   {{as}}
   </p>
   <p :class="isRed?'a':'b'" >
-    <button @click="increment">+</button>
+    <button @click="HIDE_LOADING">+</button>
     <button @click="decrement">-</button>
   </p>
-  <p>{{doneTodosCount}}</p>
-  <p v-for="item in doneTodos">{{item.id}}</p>
+doneTodosCount：<p>{{doneTodosCount}}</p>
+  doneTodos：<p className="123" v-for="item in doneTodos">{{item.id}}</p>
   <ul id="repeat-object" class="demo">
     <li v-for="value in obj">
       {{ value }}
@@ -30,9 +30,8 @@
 </template>
 
 <script>
-import {
-    mapState
-} from 'vuex'
+import {mapState, mapGetters, mapMutations, mapActions} from 'vuex'
+
 export default {
   name:'count',
   data (){
@@ -43,21 +42,22 @@ export default {
       }
     }
   },
-  computed: mapState({
-    // 箭头函数可使代码更简练
-    name: state => state.ruleForm.name,
-    count: state => state.count,
-    obj: state => state.obj,
-    doneTodosCount () {
-      return this.$store.getters.doneTodosCount
-    },
-    doneTodos (){
-      return this.$store.getters.doneTodos
-    },
-    isRed (){
-      return this.$store.state.isRed
-    }
-  }),
+  computed:{
+      ...mapState({
+      // 箭头函数可使代码更简练
+        name: state => state.ruleForm.name,
+        count: state => state.count,
+        obj: state => state.obj,
+        isRed (){
+          return this.$store.state.isRed
+        }
+      }),
+      ...mapGetters([
+      'doneTodosCount',
+      'doneTodos'
+    ])
+      
+  },
   // computed: {
   //   count() {
   //     return this.$store.state.count
@@ -70,15 +70,22 @@ export default {
     pClick : function (){
       this.$store.state.isRed = false;
     },
-    increment () {
-      this.$store.commit('HIDE_LOADING',5)
-      // this.$store.commit('ADD_OBG')
-    },
+    // HIDE_LOADING () {
+    //   this.$store.commit('HIDE_LOADING',5)
+    //   // this.$store.commit('ADD_OBG')
+    // },
     decrement () {
       this.$store.commit('decrement',{
         amount: 10
       })
-    }
+    },
+    ...mapMutations([
+      'HIDE_LOADING', // 将 `this.increment()` 映射为 `this.$store.commit('increment')`
+
+    ]),
+    ...mapActions([
+      'decrement', // 将 `this.increment()` 映射为 `this.$store.dispatch('increment')`
+    ]),
   }
 
 }
