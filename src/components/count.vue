@@ -1,7 +1,8 @@
 <template>
   <div class="hello">
   <p>{{ name }}</p>
-  <p>{{ count }}</p>
+  <p>{{ name1 }}</p>
+  <p>//{{ count }}</p>
   <p  @click="pClick">
   asdf
   asdf
@@ -31,7 +32,8 @@ doneTodosCount：<p>{{doneTodosCount}}</p>
 
 <script>
 import {mapState, mapGetters, mapMutations, mapActions} from 'vuex'
-
+import _ from 'lodash'
+window._ = _
 export default {
   name:'count',
   data (){
@@ -46,7 +48,10 @@ export default {
       ...mapState({
       // 箭头函数可使代码更简练
         name: state => state.ruleForm.name,
-        count: state => state.count,
+        name1:function(state){
+          return _.get(state, "ruleForm.name1");
+        },
+        count:  "count",
         obj: state => state.obj,
         isRed (){
           return this.$store.state.isRed

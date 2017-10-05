@@ -9,7 +9,8 @@ const state = {
 	count:2,  
 	isRed:true,
   ruleForm:{
-    name:'myname'
+    name:'myname',
+    name1:'wee'
   },
     todos: [
       { id: 1, text: 'aaa', done: true },
