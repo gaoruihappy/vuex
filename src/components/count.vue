@@ -66,6 +66,7 @@ export default {
       this.$store.state.isRed = false;
     },
     increment () {
+      console.log(this.$options)
       this.$store.commit('increment',5)
       this.$store.commit('ADD_OBG')
     },

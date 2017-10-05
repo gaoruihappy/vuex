@@ -15,6 +15,11 @@ new Vue({
   router,
   store,
   template: '<App/>',
-  components: { App }
+  components: { App },
+  customOption: 'foo',
+  created: function () {
+    console.log(this.$options.customOption) // => 'foo'
+    console.log(this.$options) // => 'foo'
+  }
 })
 
