@@ -1,5 +1,6 @@
 <template>
   <div class="hello">
+  <p>{{ name }}</p>
   <p>{{ count }}</p>
   <p  @click="pClick">
   asdf
@@ -15,8 +16,8 @@
     <button @click="increment">+</button>
     <button @click="decrement">-</button>
   </p>
-  count数量<p>{{doneTodosCount}}</p>
-  count.id==trued的id<p v-for="item in doneTodos">{{item.id}}</p>
+  <p>{{doneTodosCount}}</p>
+  <p v-for="item in doneTodos">{{item.id}}</p>
   <ul id="repeat-object" class="demo">
     <li v-for="value in obj">
       {{ value }}
@@ -37,10 +38,14 @@ export default {
   data (){
     return {
       as:23,
+      ruleForm:{
+        name:'oldname'
+      }
     }
   },
   computed: mapState({
     // 箭头函数可使代码更简练
+    name: state => state.ruleForm.name,
     count: state => state.count,
     obj: state => state.obj,
     doneTodosCount () {
@@ -66,8 +71,8 @@ export default {
       this.$store.state.isRed = false;
     },
     increment () {
-      this.$store.commit('increment',5)
-      this.$store.commit('ADD_OBG')
+      this.$store.commit('HIDE_LOADING',5)
+      // this.$store.commit('ADD_OBG')
     },
     decrement () {
       this.$store.commit('decrement',{
